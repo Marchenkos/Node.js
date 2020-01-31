@@ -1,21 +1,26 @@
-const usersList = require("../users");
-const bodyParser = require("koa-bodyparser");
+const lodash = require("lodash");
+const tokenList = require("../data/refreshTokens");
 
-async function list() {
-    return usersList;
+async function add(token) {
+    tokenList.push(token);
+    console.log(tokenList);
 }
 
-async function find(userId) {
-    for(let user of usersList) {
-        if(user.id == userId) {
-            return user;
-        }
-    }
+async function remove(value) {
+    const token = lodash.find( tokenList, value);
 
-    return null;
+    if (token) {
+        lodash.dropWhile(tokenList, token);
+    }
+}
+
+async function find(value) {
+    return lodash.find( tokenList, value);
 }
 
 module.exports = {
-    list,
+    add,
+    remove,
     find
 };
+

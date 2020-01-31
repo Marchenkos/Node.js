@@ -10,7 +10,7 @@ router.get("/", async ctx => {
 });
 
 router.get("/:id", async ctx => {
-    const user = await find(Number(ctx.params.id));
+    const user = await find({ id: Number(ctx.params.id) });
 
     if (user) {
         ctx.body = user;

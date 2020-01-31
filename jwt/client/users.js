@@ -1,17 +1,12 @@
-const usersList = require("../users");
+const userList = require("../data/users");
+const _ = require("lodash");
 
 async function list() {
-    return usersList;
+    return userList;
 }
 
-async function find(userId) {
-    for(let user of usersList) {
-        if(user.id == userId) {
-            return user;
-        }
-    }
-
-    return null;
+async function find(value) {
+    return _.find(userList, value);
 }
 
 module.exports = {
